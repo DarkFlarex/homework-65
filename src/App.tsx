@@ -3,6 +3,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import PageItem from "./components/Page/PageItem";
 import Toolbar from "./components/Toolbar/Toolbar/Toolbar";
 import MutatePages from "./components/MutatePages/MutatePages";
+import './App.css'
 
 const App: React.FC = () => {
     return (

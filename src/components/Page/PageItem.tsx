@@ -34,7 +34,7 @@ const PageItem: React.FC = () => {
             {loading ? (<Spinner />
             ) : (
                 pages ? (
-                    <div className="card">
+                    <div className="card mb-2 p-2">
                         <h4>{pages.title}</h4>
                         <p>{pages.content}</p>
                     </div>

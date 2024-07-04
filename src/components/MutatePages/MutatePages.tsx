@@ -12,7 +12,9 @@ const initialState: PageMutation = {
 const PageCategories = [
     { title: 'Home', id: 'home' },
     { title: 'About', id: 'about' },
-    { title: 'Contacts', id: 'contacts' }
+    { title: 'Contacts', id: 'contacts' },
+    { title: 'Joke', id: 'joke' },
+    { title: 'Food recipes', id: 'food_recipes' }
 ];
 
 const MutatePages: React.FC = () => {
@@ -27,7 +29,7 @@ const MutatePages: React.FC = () => {
             const response = await axiosApi.get<ApiPage>(`/pages/${id}.json`);
             if (response.data) {
                 setPageMutation({
-                    id: response.data.id,
+                    id,
                     title: response.data.title,
                     content: response.data.content,
                 });
@@ -63,14 +65,13 @@ const MutatePages: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const postData = {
-                ...pageMutation
-            };
+            const { title, content }
+                = pageMutation;
 
             if (pageMutation.id) {
-                await axiosApi.put(`/pages/${pageMutation.id}.json`, postData);
+                await axiosApi.put(`/pages/${pageMutation.id}.json`, { title, content });
             } else {
-                await axiosApi.post('/pages.json', postData);
+                await axiosApi.post('/pages.json', { title, content });
             }
 
             navigate(`/pages/${pageMutation.id}`);
@@ -82,17 +83,17 @@ const MutatePages: React.FC = () => {
     };
 
     return (
-        <div className="edit-page">
+        <div className="edit-page bg-light p-3 text-start rounded">
             <h1>Edit Page</h1>
-            <form onSubmit={onFormSubmit}>
-                <label>Select Page:</label>
+            <form className="editPageForm d-flex flex-column align-items-start justify-content-center"
+                  onSubmit={onFormSubmit}>
+                <label className="mb-2">Select Page:</label>
                 <select
                     name="id"
                     required
-                    className="AddSelectForm-input col-5 mb-3"
+                    className="AddSelectForm-input col-2 mb-3"
                     value={pageMutation.id}
                     onChange={onFieldChange}
-
                 >
                     <option value="">Select a page</option>
                     {PageCategories.map(category => (
@@ -101,6 +102,7 @@ const MutatePages: React.FC = () => {
                         </option>
                     ))}
                 </select>
+                <label className="mb-2">Title:</label>
                 <input
                     type="text"
                     name="title"
@@ -110,6 +112,7 @@ const MutatePages: React.FC = () => {
                     onChange={onFieldChange}
                     placeholder="Title"
                 />
+                <label className="mb-2">Content:</label>
                 <textarea
                     name="content"
                     required
