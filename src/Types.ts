@@ -11,3 +11,9 @@ export interface ApiPages {
 export interface Page extends ApiPage {
     id: string;
 }
+
+export interface PageMutation{
+    id: string;
+    title: string;
+    content: string;
+}

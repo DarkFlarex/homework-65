@@ -23,6 +23,11 @@ const Toolbar = () => {
                             Contacts
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink to="/pages/admin" className="nav-link">
+                            Admin
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>

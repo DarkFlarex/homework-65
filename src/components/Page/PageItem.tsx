@@ -6,7 +6,7 @@ import Spinner from "../Spinner/Spinner";
 
 const PageItem: React.FC = () => {
     const [pages, setPages] = useState<Page | null>(null);
-    const [isLoading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const { pageName } = useParams();
 
     const fetchPage = useCallback(async (pageName:string) => {
@@ -31,7 +31,7 @@ const PageItem: React.FC = () => {
 
     return (
         <>
-            {isLoading ? (<Spinner />
+            {loading ? (<Spinner />
             ) : (
                 pages ? (
                     <div className="card">
